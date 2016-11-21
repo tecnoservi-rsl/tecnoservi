@@ -76,6 +76,28 @@ $sql = "SELECT permisos.* FROM role,permisos,menu WHERE role.id_role = permisos.
 
     }
 
+     public function permisos_ch($menu,$rol,$estado){
+
+        $retVal = ($estado=='true') ? "1" : "0" ;
+
+$sql = "SELECT COUNT(permisos.id_permisos) as numero FROM permisos WHERE id_menu = $menu   and id_role = $rol";
+        $datos = $this->_db->query($sql);
+$rs=$datos->fetch();
+    if ($rs['numero']==0) {
+
+        $sql="INSERT INTO permisos values('',$menu,$rol,$retVal)";
+        $this->_db->query($sql);
+    }else{
+
+$sql = "UPDATE permisos SET permiso = $retVal WHERE id_menu = $menu AND id_role= $rol";  
+
+        $datos = $this->_db->query($sql);
+    }
+
+
+
+    }
+
 
 
 }

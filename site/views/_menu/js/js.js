@@ -50,6 +50,24 @@ $(document).on("change","#ancho_header",function(){
 $(".header-content").css("min-height",this.value+"px");
 
 });
+$(document).on("change","#permisos_ch",function(){
+
+console.log("menu--"+this.dataset.menu);
+console.log("rol--"+this.dataset.rol);
+console.log(this.checked);
+
+
+$.get(base_url+"_menu/permisos_ch",{
+
+'menu'        : this.dataset.menu,
+'rol'         : this.dataset.rol,
+'estado'      : this.checked
+
+});
+
+
+
+});
 
 
 
@@ -61,6 +79,9 @@ $(document).on("click","#cambiar_color",function(){
 $.get(base_url+"_menu/estilos",{
 
 'nav'                  : $('#nav').val(),
+'letra_nav'            : $('#letra_nav').val(),
+'letra_nav_principal'  : $('#letra_nav_principal').val(),
+'letra_nav_hover'      : $('#letra_nav_hover').val(),
 'header'               : $('#header').val(),
 'header-letra-border'  : $('#header-letra-border').val(),
 'titulos'              : $('#titulos').val(),
