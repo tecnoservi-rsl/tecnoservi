@@ -3,12 +3,12 @@
 -- http://www.phpmyadmin.net
 --
 -- Servidor: localhost
--- Tiempo de generación: 21-11-2016 a las 20:22:10
+-- Tiempo de generación: 28-11-2016 a las 04:02:40
 -- Versión del servidor: 10.1.13-MariaDB
 -- Versión de PHP: 5.5.37
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
-SET time_zone = "-04:00";
+SET time_zone = "+00:00";
 
 
 /*!40101 SET @OLD_CHARACTER_SET_CLIENT=@@CHARACTER_SET_CLIENT */;
@@ -17,8 +17,24 @@ SET time_zone = "-04:00";
 /*!40101 SET NAMES utf8mb4 */;
 
 --
--- Base de datos: `framework`
+-- Base de datos: `cumanax`
 --
+
+-- --------------------------------------------------------
+
+--
+-- Estructura de tabla para la tabla `log`
+--
+
+CREATE TABLE `log` (
+  `id` int(11) NOT NULL,
+  `id_usuario` int(11) DEFAULT NULL,
+  `ip` varchar(12) NOT NULL,
+  `controlador` varchar(30) NOT NULL,
+  `metodo` varchar(30) NOT NULL,
+  `fecha` date NOT NULL,
+  `hora` time NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 -- --------------------------------------------------------
 
@@ -91,6 +107,13 @@ INSERT INTO `usuario` (`id_usuario`, `id_role`, `login`, `password`, `estado`) V
 --
 
 --
+-- Indices de la tabla `log`
+--
+ALTER TABLE `log`
+  ADD PRIMARY KEY (`id`),
+  ADD KEY `id_usuario` (`id_usuario`);
+
+--
 -- Indices de la tabla `menu`
 --
 ALTER TABLE `menu`
@@ -125,6 +148,11 @@ ALTER TABLE `usuario`
 --
 
 --
+-- AUTO_INCREMENT de la tabla `log`
+--
+ALTER TABLE `log`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=17;
+--
 -- AUTO_INCREMENT de la tabla `menu`
 --
 ALTER TABLE `menu`
@@ -147,6 +175,12 @@ ALTER TABLE `usuario`
 --
 -- Restricciones para tablas volcadas
 --
+
+--
+-- Filtros para la tabla `log`
+--
+ALTER TABLE `log`
+  ADD CONSTRAINT `log_ibfk_1` FOREIGN KEY (`id_usuario`) REFERENCES `usuario` (`id_usuario`);
 
 --
 -- Filtros para la tabla `permisos`

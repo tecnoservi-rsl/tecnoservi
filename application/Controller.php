@@ -16,17 +16,33 @@ abstract class Controller
     
     public function __construct() {
         $this->_view = new View(new Request);
-        $rutaModelo = ROOT . 'site'.DS.'models' . DS .'_menuModel.php';
+        $rutaModelo = ROOT . 'site'.DS.'models' . DS .'appModel.php';
         if(is_readable($rutaModelo)){
             require_once $rutaModelo;
-            $this->_modelo = new _menuModel;
+            $this->_modelo = new appModel;
          if (session::get('autenticado')){
+                $usuario=Session::get('id_usuario');
              $this->_view->menu=$this->_modelo->menu(session::get('id_usuario'));   
          }else{
+            $usuario='NULL';
             $this->_view->menu=$this->_modelo->menu(); 
          }
            
         }
+        if (!empty($_SERVER['HTTP_CLIENT_IP'])){
+                $ip=$_SERVER['HTTP_CLIENT_IP'];
+            }else if (!empty($_SERVER['HTTP_X_FORWARDED_FOR'])){
+            $ip=$_SERVER['HTTP_X_FORWARDED_FOR'];
+        }else{
+            $ip=$_SERVER['REMOTE_ADDR'];
+        }
+
+        $this->_modelo->log($ip,new Request,$usuario);
+
+
+
+
+
         
     }
     

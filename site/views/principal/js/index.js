@@ -56,12 +56,16 @@ document.location=base_url+controler;
 
 
 
+/*
+		$.get(base_url+'principal/traer_datos_ci',{
 
+		'ci':20574205
 
+		},function(data) {
+			
+			console.log(data);
 
-
-
-
+		});*/
 
 
 
